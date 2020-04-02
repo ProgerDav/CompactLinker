@@ -1,0 +1,6 @@
+MongoDB User
+tinylinker_user
+$Ah0545139
+
+MongoDB Link
+mongodb+srv://tinylinker_user:<password>@cluster0-g24ma.mongodb.net/test?retryWrites=true&w=majority
