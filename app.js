@@ -18,7 +18,7 @@ app.get("*", (req, res) => {
 });
 // }
 
-const PORT = config.get("port") || process.env.PORT;
+const PORT = process.env.PORT || config.get("port");
 
 async function start() {
   try {
@@ -28,7 +28,7 @@ async function start() {
       useCreateIndex: true,
     });
 
-    app.listen(80, () => console.log(`Listening on port ${PORT}`));
+    app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
   } catch (e) {
     console.log("Error", e.message);
     process.exit(1);
