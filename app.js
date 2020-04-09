@@ -28,7 +28,7 @@ async function start() {
       useCreateIndex: true,
     });
 
-    app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+    app.listen(80, () => console.log(`Listening on port ${PORT}`));
   } catch (e) {
     console.log("Error", e.message);
     process.exit(1);
