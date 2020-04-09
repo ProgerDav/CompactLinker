@@ -5,6 +5,7 @@ import { useAuth } from "./hooks/auth.hook";
 import { AuthContext } from "./context/auth.context";
 import { Navbar } from "./components/Navbar";
 import { Loader } from "./components/Loader";
+import { Footer } from "./components/Footer";
 
 import "materialize-css";
 
@@ -24,10 +25,15 @@ function App() {
       value={{ token, login, logout, userId, isAuthenticated }}
     >
       <Router>
-        {isAuthenticated && <Navbar />}
-        <div className="container" style={{}}>
+        <Navbar />
+        <main
+          style={{
+            minHeight: "100vh"
+          }}
+        >
           {routes}
-        </div>
+        </main>
+        <Footer />
       </Router>
     </AuthContext.Provider>
   );

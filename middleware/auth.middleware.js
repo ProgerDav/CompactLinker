@@ -11,16 +11,17 @@ module.exports = (req, res, next) => {
 
     if (!token) {
       return res.status(401).json({
-        message: "Unauthenticated"
+        message: "Unauthenticated",
       });
     }
+    req.token = token;
 
     const decoded = jwt.verify(token, config.get("jwtSecret"));
     req.user = decoded;
     next();
   } catch (e) {
     res.status(401).json({
-      message: "Unauthenticated"
+      message: "Unauthenticated",
     });
   }
 };

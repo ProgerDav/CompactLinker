@@ -16,7 +16,7 @@ export const useHttp = () => {
         const response = await fetch(url, {
           method,
           body,
-          headers
+          headers,
         });
 
         const data = await response.json();

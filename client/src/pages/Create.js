@@ -11,23 +11,20 @@ export const Create = () => {
 
   const { request } = useHttp();
 
-  const pressHandler = async event => {
-    console.log(event.key);
+  const pressHandler = async (event) => {
     if (event.key === "Enter") {
       try {
         const data = await request(
           "/api/links/generate",
           "POST",
           {
-            from: link
+            from: link,
           },
           { Authorization: `Bearer ${auth.token}` }
         );
 
         history.push(`/details/${data.link._id}`);
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     }
   };
 
@@ -45,7 +42,7 @@ export const Create = () => {
             type="url"
             name="link"
             value={link}
-            onChange={e => setLink(e.target.value)}
+            onChange={(e) => setLink(e.target.value)}
             onKeyPress={pressHandler}
           />
           <label htmlFor="link">Link</label>

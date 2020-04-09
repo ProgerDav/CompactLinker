@@ -1,4 +1,15 @@
 @import "~materialize-css/dist/css/materialize.min.css";
+.site-header {
+  background-attachment: fixed;
+  background-color: #343434;
+  background-size: 100% auto;
+  color: #fff;
+  display: block;
+  min-height: 650px;
+  position: relative;
+  width: 100%;
+}
+
 input.yellow-input {
   border-bottom: 1px solid #fff !important;
   box-shadow: 0 1px 0 0 #fff !important;
@@ -15,4 +26,66 @@ input.yellow-input:focus {
 
 input.yellow-input:focus + label {
   color: #ffeb3b !important;
+}
+
+.full-height {
+  height: 100%;
+  padding: 0 2rem;
+}
+
+ul.stepper.horizontal {
+  min-height: 381px;
+}
+
+.step-content {
+  overflow: hidden !important;
+}
+
+.step-actions {
+  position: static !important;
+}
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+p {
+  line-height: 2rem;
+}
+.sidenav-trigger {
+  color: #26a69a;
+}
+.parallax-container {
+  min-height: 650px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255, 255, 255, 0.9);
+}
+.parallax-container .section {
+  width: 100%;
+}
+@media only screen and (max-width: 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  #index-banner .section {
+    top: 0;
+  }
+}
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+footer.page-footer {
+  margin: 0;
 }
