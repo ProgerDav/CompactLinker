@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://localhost:5000",
+  "baseUrl": "https://compactlinker.herokuapp.com",
   "port": 5000,
   "jwtSecret": "some randomly generated string",
   "jwtTokenLifeTime": "1h",
