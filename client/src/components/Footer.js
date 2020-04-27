@@ -7,16 +7,23 @@ export const Footer = () => (
         <div className="col l6 s12">
           <h5 className="white-text">CompactLinker</h5>
           <p className="grey-text text-lighten-4">
-            You can use rows and columns here to organize your footer content.
+            You can use this website to shorten, manage and share your most
+            important links.
           </p>
         </div>
       </div>
     </div>
     <div className="footer-copyright">
       <div className="container">
-        &copy; copyright {new Date().getFullYear()}
-        <a className="grey-text text-lighten-4 right" href="#!">
-          More Links
+        <p>
+          &copy; CompactLinker {new Date().getFullYear()}. All rights reserved
+        </p>
+        Developed by Davit Gyulnazaryan
+        <a
+          className="grey-text text-lighten-4 right"
+          href="mailto:developer.gyulnazaryan@gmail.com"
+        >
+          Email us
         </a>
       </div>
     </div>

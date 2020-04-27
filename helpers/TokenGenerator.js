@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const config = require("config");
 
 module.exports = class TokenGenerator {
   publicKey = "";
@@ -12,11 +13,15 @@ module.exports = class TokenGenerator {
   }
 
   sign = (payload, signOptions) => {
-    return jwt.sign(payload, { ...this.options, ...signOptions });
+    return jwt.sign(payload, this.privateKey, {
+      ...this.options,
+      ...signOptions,
+    });
   };
 
   refresh = (token, refreshOptions) => {
-    const payload = jwt.verify(token, this.publicKey, refreshOptions.verify);
+    const decoded = jwt.verify(token, config.get("jwtSecret"));
+    // const payload = jwt.verify(token, this.publicKey);
 
     delete payload.iat;
     delete payload.exp;
@@ -24,6 +29,8 @@ module.exports = class TokenGenerator {
     delete payload.jti;
 
     const jwtSignOptions = { ...this.options, jwtid: refreshOptions.jwtid };
+
+    // return this.sign({ userId: "5e836c8b40b84d11fcc7c6d4" });
 
     return jwt.sign(payload, this.privateKey, jwtSignOptions);
   };

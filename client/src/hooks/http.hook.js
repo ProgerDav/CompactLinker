@@ -18,9 +18,10 @@ export const useHttp = () => {
           body,
           headers,
         });
-
         const data = await response.json();
 
+        // if (!response.ok && response.status === 401)
+        // return (window.location = "/");
         if (!response.ok) {
           throw new Error(data.message || "An error occured");
         }
@@ -31,7 +32,7 @@ export const useHttp = () => {
       } catch (e) {
         setLoading(false);
         setError(e.message);
-        throw e;
+        // throw e;
       }
     },
     []

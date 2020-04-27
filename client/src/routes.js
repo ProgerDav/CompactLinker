@@ -5,7 +5,7 @@ import { Links } from "./pages/Links";
 import { Create } from "./pages/Create";
 import { Details } from "./pages/Details";
 
-export const useRoutes = isAuthenticated => {
+export const useRoutes = (isAuthenticated) => {
   if (isAuthenticated) {
     return (
       <Switch>

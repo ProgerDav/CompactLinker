@@ -1,7 +1,7 @@
 {
   "name": "tinylinker",
   "version": "1.0.0",
-  "description": "App to shorten links",
+  "description": "App used to shorten, manage and share links",
   "main": "app.js",
   "scripts": {
     "start": "npm install && node app.js",
@@ -20,7 +20,7 @@
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
     "jsonwebtoken": "^8.5.1",
-    "materialize-stepper": "^3.1.0",
+    "link-preview-node": "^1.0.4",
     "mongoose": "^5.9.7",
     "shortid": "^2.2.15"
   },

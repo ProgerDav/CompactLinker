@@ -1,27 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../context/auth.context";
-import { useHttp } from "../hooks/http.hook";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useApi } from "../hooks/api.hook";
 
 export const Create = () => {
   const [link, setLink] = useState("");
 
   const history = useHistory();
-  const auth = useContext(AuthContext);
 
-  const { request } = useHttp();
+  const {
+    api: { createLink },
+  } = useApi();
 
   const pressHandler = async (event) => {
     if (event.key === "Enter") {
       try {
-        const data = await request(
-          "/api/links/generate",
-          "POST",
-          {
-            from: link,
-          },
-          { Authorization: `Bearer ${auth.token}` }
-        );
+        const data = await createLink(link);
 
         history.push(`/details/${data.link._id}`);
       } catch (e) {}
@@ -43,9 +36,9 @@ export const Create = () => {
             name="link"
             value={link}
             onChange={(e) => setLink(e.target.value)}
-            onKeyPress={pressHandler}
+            onKeyUp={pressHandler}
           />
-          <label htmlFor="link">Link</label>
+          <label htmlFor="link">Url</label>
         </div>
       </div>
     </div>

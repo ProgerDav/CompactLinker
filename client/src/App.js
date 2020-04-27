@@ -10,9 +10,9 @@ import { Footer } from "./components/Footer";
 import "materialize-css";
 
 function App() {
-  const { token, userId, login, logout, ready } = useAuth();
+  const { credentials, login, logout, ready } = useAuth();
 
-  const isAuthenticated = !!token;
+  const isAuthenticated = !!credentials;
 
   const routes = useRoutes(isAuthenticated);
 
@@ -22,13 +22,13 @@ function App() {
 
   return (
     <AuthContext.Provider
-      value={{ token, login, logout, userId, isAuthenticated }}
+      value={{ credentials, login, logout, isAuthenticated }}
     >
       <Router>
         <Navbar />
         <main
           style={{
-            minHeight: "100vh"
+            minHeight: "100vh",
           }}
         >
           {routes}

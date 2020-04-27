@@ -1,7 +1,8 @@
 {
-  "baseUrl": "https://compactlinker.herokuapp.com",
+  "baseUrl": "http://localhost:5000/",
   "port": 5000,
   "jwtSecret": "some randomly generated string",
+  "jwtPublic": "some randomly generated string for public key",
   "jwtTokenLifeTime": "1h",
   "mongoUri": "mongodb+srv://tinylinker_user:$Ah0545139@cluster0-g24ma.mongodb.net/app?retryWrites=true&w=majority"
 }

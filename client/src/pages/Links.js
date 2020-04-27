@@ -1,30 +1,38 @@
-import React, { useState, useContext, useCallback, useEffect } from "react";
-import { useHttp } from "../hooks/http.hook";
-import { AuthContext } from "../context/auth.context";
+import React, { useState, useCallback, useEffect } from "react";
 import { Loader } from "../components/Loader";
 import { LinksList } from "../components/LinksList";
+import { FAB } from "../components/FAB";
+import { useApi } from "../hooks/api.hook";
 
 export const Links = () => {
   const [links, setLinks] = useState([]);
 
-  const { request, loading } = useHttp();
+  const removeLink = (id) => setLinks(links.filter((link) => link._id !== id));
 
-  const { token } = useContext(AuthContext);
+  const pushLink = (link) => setLinks([...links, link]);
+
+  const {
+    api: { getLinks },
+    loading,
+  } = useApi();
 
   const fetchLinks = useCallback(async () => {
-    const links = await request("/api/links", "GET", null, {
-      Authorization: `Bearer ${token}`
-    });
+    const links = await getLinks();
     setLinks(links);
-  }, [token, request]);
+  }, []);
 
   useEffect(() => {
     fetchLinks();
   }, [fetchLinks]);
 
-  if (loading) {
-    return <Loader />;
-  }
+  if (loading) return <Loader />;
 
-  return <>{!loading && <LinksList links={links} />}</>;
+  return (
+    <>
+      <div className="container">
+        {!loading && <LinksList links={links} removeLinkFromDom={removeLink} />}
+      </div>
+      <FAB pushLink={pushLink} />
+    </>
+  );
 };

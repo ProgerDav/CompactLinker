@@ -4,10 +4,11 @@ const shortid = require("shortid");
 const config = require("config");
 const auth = require("../middleware/auth.middleware");
 const router = Router();
+const getMetaTags = require("../helpers/LinkPreview");
 
 router.get("/", auth, async (req, res) => {
   try {
-    const links = await Link.find({ owner: req.user.userId });
+    const links = await Link.find({ owner: req.user._id });
     res.json(links);
   } catch (e) {
     return res
@@ -19,7 +20,8 @@ router.get("/", auth, async (req, res) => {
 router.get("/:id", auth, async (req, res) => {
   try {
     const link = await Link.findById(req.params.id);
-    res.json(link);
+    const metaData = await getMetaTags(link.from);
+    res.json({ link, metaData });
   } catch (e) {
     return res
       .status(500)
@@ -33,7 +35,7 @@ router.post("/generate", auth, async (req, res) => {
     const { from } = req.body;
 
     const code = shortid.generate();
-    const existing = await Link.findOne({ from });
+    const existing = await Link.findOne({ from, owner: req.user._id });
 
     if (existing) {
       return res.json({ link: existing });
@@ -45,12 +47,31 @@ router.post("/generate", auth, async (req, res) => {
       code,
       to,
       from,
-      owner: req.user.userId
+      owner: req.user._id,
     });
 
     await link.save();
 
     res.status(201).json(link);
+  } catch (e) {
+    return res
+      .status(500)
+      .json({ message: "An error occured. Try again later" });
+  }
+});
+
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    const link = await Link.findOne({
+      _id: req.params.id,
+      owner: req.user._id,
+    });
+
+    if (!link) return res.status(404).json({ message: "Link not found" });
+
+    await link.delete();
+
+    res.status(200).json({ message: "Link deleted successfully" });
   } catch (e) {
     return res
       .status(500)
