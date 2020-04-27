@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useApi } from "../hooks/api.hook";
 import { useMessage } from "../hooks/message.hook";
 
-export const Modal = ({ pushLink }) => {
+export const Modal = ({ pushLink, initialLink }) => {
   const [link, setLink] = useState("");
   const message = useMessage();
   const {
@@ -10,23 +10,9 @@ export const Modal = ({ pushLink }) => {
     api: { createLink },
   } = useApi();
 
-  const getTextFromClipBoard = useCallback(async () => {
-    try {
-      await navigator.permissions.query({ name: "clipboard-read" });
-      const text = await navigator.clipboard.readText();
-
-      if (
-        text.match(
-          /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi
-        )
-      )
-        setLink(text);
-    } catch (e) {}
-  }, [setLink]);
-
   useEffect(() => {
-    getTextFromClipBoard();
-  }, [getTextFromClipBoard]);
+    setLink(initialLink);
+  }, [initialLink]);
 
   const handleSubmit = async () => {
     try {
