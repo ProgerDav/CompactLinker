@@ -73,9 +73,9 @@ export const Auth = () => {
             </h1>
             <div className="row center">
               <h5 className="header col s12 light">
-                Shorten your links - save your time
+                Shorten and manage Your links
               </h5>
-              <div className="col m12 l6">
+              <div className="col s12 m12 l6">
                 <div className="card blue teal lighten-1">
                   <div className="card-content">
                     <div className="card-title">
@@ -126,7 +126,7 @@ export const Auth = () => {
                   </div>
                 </div>
               </div>
-              <div className="col m12 l6">
+              <div className="col s12 m12 l6">
                 <div className="card blue darken-1 text-left">
                   <div className="card-content">
                     <ul className="stepper linear horizontal">
@@ -135,7 +135,7 @@ export const Auth = () => {
                           Credentials
                         </div>
                         <div className="step-content">
-                          <div className="row">
+                          <div className="row mt2">
                             <div className="input-field col s12">
                               <input
                                 placeholder="example@domain.com..."

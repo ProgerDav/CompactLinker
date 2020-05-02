@@ -27,6 +27,7 @@ export const Create = () => {
 
   return (
     <div className="row">
+      <h5 className="header center">Paste your link to minify!</h5>
       <div className="col s8 offset-s2" style={{ paddingTop: "2 rem" }}>
         <div className="input-field">
           <input

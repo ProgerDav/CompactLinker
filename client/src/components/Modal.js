@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useApi } from "../hooks/api.hook";
 import { useMessage } from "../hooks/message.hook";
+import { LinksContext } from "../context/links.context";
 
-export const Modal = ({ pushLink, initialLink }) => {
+export const Modal = ({ initialLink }) => {
+  const { pushLink } = useContext(LinksContext);
+
   const [link, setLink] = useState("");
   const message = useMessage();
   const {
@@ -14,7 +17,8 @@ export const Modal = ({ pushLink, initialLink }) => {
     setLink(initialLink);
   }, [initialLink]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    // e.preventDefault();
     try {
       if (
         !link.match(
@@ -25,6 +29,9 @@ export const Modal = ({ pushLink, initialLink }) => {
       }
       const linkData = await createLink(link);
       setLink("");
+
+      if (linkData.duplicate) return message("Link already exists");
+
       pushLink(linkData);
       message("Link was shortened successfully");
     } catch (e) {}
@@ -35,8 +42,8 @@ export const Modal = ({ pushLink, initialLink }) => {
       <div className="modal-content">
         <h5>Paste a new link</h5>
         <hr />
-        <div className="row">
-          <div className="input-field col s6 m6 l5 offset-l3 offset-m1">
+        <form className="row">
+          <div className="input-field col l5 offset-l3 m7 offset-m2 s12">
             <input
               id="link"
               name="link"
@@ -45,10 +52,11 @@ export const Modal = ({ pushLink, initialLink }) => {
               placeholder="https://example.am"
               value={link}
               onChange={(e) => setLink(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
             />
             <label htmlFor="link">Url</label>
           </div>
-          <div className="input-field col s2 m2 l1">
+          <div className="input-field col l1 m1 s3">
             <button
               disabled={loading}
               className="btn waves-effect waves-light blue darken-1"
@@ -58,7 +66,7 @@ export const Modal = ({ pushLink, initialLink }) => {
               Minify
             </button>
           </div>
-        </div>
+        </form>
       </div>
       <div className="modal-footer">
         <button className="modal-close waves-effect waves-green btn-flat">

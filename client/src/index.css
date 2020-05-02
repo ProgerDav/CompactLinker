@@ -45,25 +45,16 @@ ul.stepper.horizontal {
   overflow: hidden !important;
 }
 
+.step-content .row {
+  margin-top: 1rem;
+}
+
 .step-actions {
   position: static !important;
 }
 
-/* Custom Stylesheet */
-
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
-
 p {
   line-height: 2rem;
-}
-
-.sidenav-trigger {
-  color: #26a69a;
 }
 
 .parallax-container {
@@ -75,22 +66,6 @@ p {
 
 .parallax-container .section {
   width: 100%;
-}
-
-@media only screen and (max-width: 992px) {
-  .parallax-container .section {
-    position: absolute;
-    top: 40%;
-  }
-  #index-banner .section {
-    top: 10%;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  #index-banner .section {
-    top: 0;
-  }
 }
 
 .icon-block {

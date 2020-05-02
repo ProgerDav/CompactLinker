@@ -1,0 +1,19 @@
+.table-container .collapsible-body {
+  padding: 0 2rem;
+}
+
+.table-container .truncate {
+  width: 250px;
+}
+
+@media (max-width: 900px) {
+  .table-container .truncate {
+    width: 150px;
+  }
+}
+
+@media (max-width: 540px) {
+  .table-container .truncate {
+    width: 75px;
+  }
+}

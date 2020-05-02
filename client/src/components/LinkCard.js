@@ -2,6 +2,8 @@ import React from "react";
 import { CopyButton } from "./CopyButton";
 import { useHistory } from "react-router-dom";
 import { useApi } from "../hooks/api.hook";
+import { ExternalLink } from "./ExternalLink";
+import { Link } from "react-router-dom";
 
 export const LinkCard = ({ link, metaData }) => {
   const history = useHistory();
@@ -49,42 +51,26 @@ export const LinkCard = ({ link, metaData }) => {
             <div className="card-content">
               <p>
                 Your link: <CopyButton text={link.to} />
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="truncate"
-                  href={link.to}
-                >
-                  {link.to}
-                </a>
+                <ExternalLink text={link.to} href={link.to} />
               </p>
               <p>
                 Original link: <CopyButton text={link.from} />
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="truncate"
-                  href={link.from}
-                >
-                  {link.from}
-                </a>
+                <ExternalLink text={link.from} href={link.from} />
               </p>
               <p>
                 Clicks: <strong>{link.clicks}</strong>
               </p>
               <p>
-                Creation date:
+                Creation date:{" "}
                 <strong>{new Date(link.date).toLocaleDateString()}</strong>
               </p>
               <div className="card-action">
-                <a
-                  target="_blank"
-                  className="teal-text"
-                  rel="noopener noreferrer"
+                <Link to="/links">Back to my links</Link>
+                <ExternalLink
+                  text="Visit link"
                   href={link.from}
-                >
-                  Visit
-                </a>
+                  className="teal-text"
+                />
               </div>
             </div>
           </div>
